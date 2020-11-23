@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #time {
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: pink;
+            border-radius: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="time">
+
+    </div>
+</body>
+
+</html>
+<script>
+   
+    function zero(num) {
+        return num < 10 ? "0" + num : num;
+    }
+    function timeDown() {
+        var cha = new Date(targetStr) - new Date();
+        if (cha <= 0) {
+            clearInterval(timer);
+            timer=null;
+            return"已经结束";
+
+        }
+        var hour = Math.floor(cha / 1000 / 3600);
+        var minute = Math.floor((cha - hour * 1000 * 60 * 60) / (1000 * 60));
+        var second = Math.floor((cha - hour * 1000 * 60 * 60 - minute * 1000 * 60) / 1000);
+        return zero(hour) + "时" + zero(minute) + "分" + zero(second) + "秒"
+    }
+    var targetStr="2020-11-20 18:00:00";
+    var time = document.getElementById("time");
+    time.innerText=timeDown(targetStr);
+
+    var timer=setInterval(function(){
+        time.innerText=timeDown(targetStr);
+    },1000)
+
+
+
+
+</script>

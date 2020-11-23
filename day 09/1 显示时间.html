@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="main" id="main"></div>
+</body>
+</html>
+<script>
+  
+    function zero(num){
+        return num<10?"0"+num:num;
+    }
+    function clockFn(){
+        var time=new Date();
+        var year=time.getFullYear();
+        var month=time.getMonth()+1;
+        var date=time.getDate(); //天 20号
+        var day=time.getDay();//[0-6] 周日到周六
+
+        var hours=time.getHours();
+        var minutes=time.getMinutes();
+        var seconds=time.getSeconds();
+        var weekStr=["周日","周一","周二","周三","周四","周五","周六"];
+
+        return year+"年"+zero(month)+"月"+zero(date)+"日"+" "+weekStr[day]+" "+zero(hours)+":"+zero(minutes)+":"+zero(seconds);
+
+    }
+    var main=document.getElementById("main");
+    main.innerText=clockFn();
+    setInterval(function(){
+        main.innerText=clockFn();
+     },1000);
+    
+    
+</script>

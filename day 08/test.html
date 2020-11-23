@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+        <p id="p1">p1</p>
+        <p id="p2">p2</p>
+        <p>p</p>
+    </div>
+</body>
+
+</html>
+<script>
+    var main = document.getElementById("main");
+
+    function myChildren(child) {     
+        var b = child.childNodes;                     
+        var a = [];
+        for (var i = 0; i < b.length; i++) {
+            if (b[i].nodeType == 1) {
+                a.push(b[i]);
+            }
+
+        }
+        return a;
+    }
+    var res = myChildren(main);
+
+</script>

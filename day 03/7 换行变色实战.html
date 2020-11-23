@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+         ul{
+             list-style: none;          
+         }
+         .main{
+             width: 300px;
+             margin: 0 auto;
+             border: 2px solid red;
+         }
+         .main li{
+             height: 40px;
+             line-height: 40px;
+             text-align: center;
+         }
+    </style>
+</head>
+<body>
+    <ul id="main" class="main">
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+        <li>珠峰十年</li>
+    </ul>
+</body>
+</html>
+<script>
+    var main=document.getElementById("main");
+    var lis=main.getElementsByTagName("li");
+    
+    for(var i=0; i<lis.length;i++){
+        if(i%2==0){
+            lis[i].style.backgroundColor=("yellow");
+        }
+        else{
+            lis[i].style.backgroundColor=("green");
+        }
+         //给每一个li绑定鼠标滑过事件
+        lis[i].onmouseover=function(){
+            //把原来的颜色存到这个元素身上
+            this.oldcolor=this.style.backgroundColor;
+
+            //改背景颜色
+            this.style.backgroundColor="red";
+            
+        }
+        lis[i].onmouseout=function(){
+           //当鼠标离开的时候，还原 原来li的背景色
+            this.style.backgroundColor=this.oldcolor;
+        }
+    }
+    
+    </script>

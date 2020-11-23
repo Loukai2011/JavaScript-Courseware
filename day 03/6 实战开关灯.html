@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: darkturquoise;
+        }
+
+        .main {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border: 10px solid pink;
+        }
+
+        #btn {
+            display: block;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            width: 100%;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: 200px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <button id="btn">隐藏</button>
+
+        <img src="QQ图片20201111153534.png" alt="" id="photo">
+    </div>
+</body>
+
+</html>
+<script>
+    var btn = document.getElementById("btn");
+    var photo = document.getElementById("photo");
+    btn.onclick = function () {
+         //一个等号是赋值 两个等号是比较
+        if (btn.innerText == "隐藏") {
+            btn.innerText = "显示";
+            photo.style.display = "none";
+        }
+        else{
+            btn.innerText = "隐藏";
+            photo.style.display = "block";
+        }
+
+    }
+</script>

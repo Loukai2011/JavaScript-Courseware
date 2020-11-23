@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: pink;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+</body>
+
+</html>
+<script>
+
+    var num = "0123456789";
+    function getNum() {
+        var str = "";
+        for (var i = 0; i < 4; i++) {
+            var index = Math.round(Math.random() * 9);
+            if (str.indexOf(num[index]) > -1) {
+                i--;
+                continue;
+            }
+            str = str + num[index];
+        }
+        return str;
+    }
+
+
+    var main = document.getElementById("main");
+    main.innerText = getNum();
+    var set = setInterval(function () {
+        main.innerText = getNum();
+    }, 1000);
+
+
+    var set2 = setTimeout(function () {
+        clearInterval(set);
+        set = null;
+        clearTimeout(set2);
+        set2 = null;
+    }, 10000);
+
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="code"></div>
+    
+    <button id="btn">获取验证码</button>
+</body>
+</html>
+<script>
+    //索引是0-61；
+var str="qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890";
+var code=document.getElementById("code");
+var btn=document.getElementById("btn");
+function getCode(){
+    //最终要展示的四位数的字符串
+    var resStr="";
+    for(var i=0;i<4;i++){
+        //Math.random()*61 [0-61)
+        var index=Math.round(Math.random()*61);
+        //生成不重复的
+        if(resStr.indexOf(str[index])>-1){
+            i--;
+            continue;
+        }
+        resStr=resStr+str[index];
+    }
+    return resStr;
+}
+
+code.innerText=getCode();
+
+btn.onclick=function(){
+    code.innerText=getCode();
+}
+
+
+
+    
+</script>
