@@ -12,10 +12,21 @@
 代码自上而下执行：
 */
 
-console.log(a); // undefined
-if(1==2){
-  var a=12;
-}
-console.log(a);//undfined
+// console.log(a); // undefined
+// if(1==2){
+//   var a=12;
+// }
+// console.log(a);//undfined
 
+
+console.log(num);// undefined
+console.log(fn);// undefined
+     if([]){
+         // 只要进到当前if条件中，会立即对fn进行赋值；
+         fn()
+         var num=100;
+         function fn(){console.log("a")}
+         
+     }
+console.log(fn);// undefined
 
