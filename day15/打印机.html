@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 100%;
+            height: 800px;
+            margin: 0 auto;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .one,
+        .two {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            overflow: auto;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 22px;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="one">
+            脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕脱贫摘帽不是终点，而是新生活、新奋斗的起点。要针对主要矛盾的变化，理清工作思路，推动减贫战略和工作体系平稳转型，统筹纳入乡村振兴战略，建立长短结合、标本兼治的体制机制。这项工作，中央有关部门正在研究。总的要有利于激发欠发达地区和农村低收入人口发展的内生动力，有利于实施精准帮扶，促进逐步实现共同富裕
+        </div>
+        <button>开始打印</button>
+        <div class="two"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    var one = document.querySelector(".one");
+    var two = document.querySelector(".two");
+    var button = document.querySelector("button")
+    var str = one.innerText;
+    var a = "";
+
+    button.onclick = function () {
+        var time1 = setInterval(function () {
+            if (str.length == 0) {
+                console.log(1);
+                clearInterval(time1);
+            }
+            a = a + str.slice(0, 1);
+            str = str.substr(1);
+            one.innerText = str;
+            two.innerText = a;
+        }, 10)
+    }
+
+
+
+
+
+
+</script>

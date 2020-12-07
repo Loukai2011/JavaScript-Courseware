@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="iconfont.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="main" class="main">
+        <div id="topBar" class="topBar">
+            <span>排序</span>
+            <a class="sortBtn" href="javascript:;" sortFlag="time">
+                <span>上架时间</span>
+                <div class="arrows">
+                    <b class="iconfont icon-shang arrowUp"></b>
+                    <b class="iconfont icon-xiajiantou arrowDown"></b>
+                </div>
+            </a>
+            <a class="sortBtn" href="javascript:;" sortFlag="hot">
+                <span>热度</span>
+                <div class="arrows">
+                    <b class="iconfont icon-shang arrowUp"></b>
+                    <b class="iconfont icon-xiajiantou arrowDown"></b>
+                </div>
+            </a>
+            <a class="sortBtn" href="javascript:;" sortFlag="price">
+                <span>价格</span>
+                <div class="arrows">
+                    <b class="iconfont icon-shang arrowUp"></b>
+                    <b class="iconfont icon-xiajiantou arrowDown"></b>
+                </div>
+            </a>
+        </div>
+
+        <ul class="lists" id="lists">
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <!-- <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="">
+                <p class="title">HUAWEI全网通版(亮黑色)</p>
+                <p>2017-03-15</p>
+                <p class="numInfo">
+                    <span>999元</span>
+                    <span>99</span>
+                </p>
+            </li> -->
+        </ul>
+
+    </div>
+</body>
+
+</html>
+<script>
+    var data = null;
+    var str = ``;
+    var lists = document.getElementById("lists");
+    var links = document.querySelectorAll("#main .sortBtn")
+    var lis;
+
+    //拿数据 
+    /*
+    1创建ajax 实例
+    
+    */
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", "data.json", true);//打来请求地址 true 默认的异步 false就是同步
+    xhr.onreadystatechange = function () {
+        //xhr.status符合以2开头的三位数
+        if (xhr.readyState == 4 && /^2\d{2}/.test(xhr.status)) {
+            //获取数据 并转换成数组
+
+            data = JSON.parse(xhr.responseText);
+            console.log(data);
+            bindHTML(data);
+        }
+    }
+    //发送请求
+    xhr.send();
+    //绑定数据
+    function bindHTML(data) {
+        data.forEach(function (item, index) {
+            str += `<li time="${item.time}" hot="${item.hot}" price="${item.price}">
+                <img src="${item.img}" alt="">
+                <p class="title">${item.title}</p>
+                <p>${item.time}</p>
+                <p class="numInfo">
+                    <span>${item.price}</span>
+                    <span>${item.hot}</span>
+                </p>
+            </li>`
+        });
+
+        lists.innerHTML = str;
+        lis = [].slice.call(document.querySelectorAll("#main li"));
+    }
+
+
+
+    for (var i = 0; i < links.length; i++) {
+        links[i].flag = -1;
+        console.log(links[i]);
+        //给每一个a标签绑定点击事件
+        links[i].onclick = function () {
+
+            //文档碎片
+            var frg = document.createDocumentFragment();
+            var that = this;
+            this.flag = this.flag * -1;           
+            var sortFlag = this.getAttribute("sortFlag");
+            if (sortFlag == "time") {
+                //时间排序
+                lis.sort(function (a, b) {
+                    return (a.getAttribute("time").replace(/-/g, "") - b.getAttribute("time").replace(/-/g, "")) * that.flag;
+                });
+                console.log(this.flag);
+            }
+            else if (sortFlag == "hot") {
+                lis.sort(function (a, b) {
+                    return (a.getAttribute("hot") - b.getAttribute("hot")) * that.flag
+                });
+
+            }
+            else {
+                lis.sort(function (a, b) {
+                    return (a.getAttribute("price") - b.getAttribute("price")) * that.flag
+                });
+            }
+            for (var i = 0; i < lis.length; i++) {
+                frg.appendChild(lis[i]);
+            }
+            lists.appendChild(frg);
+
+
+
+            //为了保证一个，在添加之前，都先清除掉
+            var curs = document.querySelectorAll(".current");
+            var arrowAry = this.querySelectorAll("b");
+            for (var i = 0; i < links.length; i++) {
+                if (links[i] != this) {
+                    links[i].flag = -1;
+                }
+            }
+            for (var i = 0; i < curs.length; i++) {
+                curs[i].classList.remove("current");
+            }
+            //升序
+            if (this.flag == 1) {
+                arrowAry[0].classList.add("current");
+            }
+            //降序
+            else {
+                arrowAry[1].classList.add("current");
+            }
+
+        }
+
+    }
+    /*
+    思路：
+        1、从后台获取数据 并用JSON方法转换把数据为 数组 再用foreach 方法遍历数组 
+           把数组的每一项 都拼接成一个字符串 再用innerHTML 传到页面中
+        2、排序
+           首先利用a标签的点击事件实现排序
+           点击A标签时 通过A标签的标签栏 自定义属性 按照 热度 价格 生产日期排升序
+           再次点击时 给每一A标签添加一个flag属性-1 每次乘以这个 属性 实现b-a倒叙
+           点击时定义一个 变量 去接受这些排好序的 li 
+           再用for循环 遍历这个变量 依次把这个变量中的每一项 添加到页面中去
+           （优化：定义一个文档碎片 把遍历好的每一项 先添加到文档碎片中 最后一次性的添加到页面中去）
+        3、点击时 让旁边的三角图标 更改颜色
+           可以通过判断之前给每一个 A标签添加的flag属性
+           点击时给 三角图标 动态添加一个类名 实现颜色转换
+           属性为1 为升序 上三角
+           属性为-1 为降序序 下三角
+           再添加之前 要清除页面中  所有A标签有current类名的 保证唯一性
+
+           同时为了 保证页面的 良好用户体验
+           把没有的点击到的 A标签 的flag值 恢复到默认状态-1；
+*/
+
+
+
+
+</script>

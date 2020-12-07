@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        .main {
+            width: 1000px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+
+        .first {
+            height: 50px;
+            line-height: 50px;
+            background-color: lightgoldenrodyellow;
+            position: relative;
+        }
+ button{
+     outline: none;
+     border: none;
+ }
+        .up {
+
+            width: 0;
+            height: 0;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid red;
+            position: absolute;
+            top: 12px;
+        }
+
+        .down {
+            width: 0;
+            height: 0;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-top: 10px solid red;
+            position: absolute;
+            top: 27px;
+
+        }
+
+        .second {
+            width: 100%;
+            /* height: 550px; */
+            border: 1px solid yellow;
+            background-color: rgb(237, 222, 243);
+        }
+
+        li {
+            width: 179px;
+            height: 300px;
+            background-color: white;
+            padding-top: 30px;
+            margin-right: 21px;
+            margin-bottom: 17px;
+            box-sizing: border-box;
+            color: rgb(116, 100, 100);
+            margin-top: 20px;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 160px;
+            height: 160px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-left: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+        }
+
+        .second li>p:nth-child(2) {
+            font-size: 12px;
+
+        }
+
+        .second li>p:nth-child(4) {
+            line-height: 10px;
+
+        }
+
+        span {
+            margin-left: 68px;
+        }
+
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="first">
+            <span class="">排序</span>
+            <span>上架时间 <button class="up"></button> <button class="down"></button></span>
+            <span>热度 <button class="up"></button> <button class="down"></button></span>
+            <span>价格     <button class="up"></button> <button class="down"></button></span>
+        </div>
+        <div class="second">
+            <ul class="info">
+                <li id="1"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="2"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="3"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="4"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="5"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="6"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="7"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+                <li id="8"> <img src="8.jpg" alt="">
+                    <p>HUAWEI全网通版(亮黑色)</p>
+                    <p>2017-03-15</p>
+                    <p>198元 <span>499</span></p>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

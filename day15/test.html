@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,ol{
+            list-style: none;
+        }
+        .main{
+            width: 479px;
+            height: 591px;
+            margin: 0 auto;
+            background: url(images/bg1.png);
+            padding: 30px;
+            box-sizing: border-box;     
+            color: white; 
+            position: relative;     
+        }
+        button{
+            width: 52px;
+            height: 44px;
+            border: none;
+            outline: none;
+        }
+        .shop li{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add{
+            background: url(images/add.png);
+        }
+        .sub{
+            background: url(images/sub.png);
+        }
+        .num{
+            width: 52px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background-color: white;
+            color: black;
+            border-radius: 8px;
+        }
+        .shopInfo{
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <ul class="shop">
+            <li>
+                <button class="add" flag="1"></button>
+                <span class="num">0</span>
+                <button class="sub" flag="0"></button>
+                <span>单价：
+                    <span class="price">2</span>元 
+                    &nbsp; &nbsp;
+                    小计： 
+                    <span class="xjMonry">0</span>元
+            </span>
+            </li>
+            <li>
+                <button class="add" flag="1"></button>
+                <span class="num">0</span>
+                <button class="sub" flag="0"></button>
+                <span>单价：
+                    <span class="price">5</span>元 
+                    &nbsp; &nbsp;
+                    小计： 
+                    <span class="xjMonry">0</span>元
+            </span>
+            </li>
+        </ul>
+
+        <div class="shopInfo">
+            <p>商品共多少件：<span class="totalNum">0</span>件</p>
+            <p>商品共花了多少钱：<span class="totalPrice">0</span>元</p>
+            <p>选中的最贵的单价的是：<span class="maxPrice">0</span>元</p>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var buttons=document.querySelectorAll(".shop button");
+    var totalNum=document.querySelector(".totalNum");
+    var totalPrice=document.querySelector(".totalPrice");
+    var maxPrice=document.querySelector(".maxPrice");
+    for(var i=0;i<buttons.length;i++){
+        buttons[i].onclick=function(){
+            var parentEle=this.parentNode;
+            var flag=this.getAttribute("flag");
+            var xjMonry=parentEle.querySelector(".xjMonry")
+            var price=Number(parentEle.querySelector(".price").innerText);
+            var num=parentEle.querySelector(".num")
+            var nowNum=Number(num.innerText);
+            var a=0;
+            if(flag==1){
+                a=nowNum+1;
+            }
+            else{
+                if(nowNum-1<0){
+                    nowNum=0;
+                    return; 
+                }
+                a=nowNum-1;
+            }
+            num.innerText=a;           
+            xjMonry.innerText=price*a
+
+            var nums=document.querySelectorAll(".num");
+            var xjMonrys=document.querySelectorAll(".xjMonry")
+            var b=0;
+            var c=0;
+            for(var i=0;i<nums.length;i++){
+               b=b+Number(nums[i].innerText);
+               c=c+Number(xjMonrys[i].innerText);
+            }
+           
+            totalNum.innerText=b;
+            totalPrice.innerText=c;
+
+            var prices=document.querySelectorAll(".price");
+            var max=0;
+            // for(var i=0;i<prices.length;i++){
+            //     if(nums[i].innerText==0){
+            //         continue;
+            //     }
+            //    max=Number(prices[i].innerText)>max?Number(prices[i].innerText):max;
+            // }
+
+            for(var i=0;i<prices.length;i++){
+                if(Number(nums[i].innerText)>0){
+                    max=Number(prices[i].innerText)>max?Number(prices[i].innerText):max;
+                }
+            }
+            maxPrice.innerText=max;
+
+
+
+
+        }
+    }
+</script>
