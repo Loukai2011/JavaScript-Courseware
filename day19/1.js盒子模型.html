@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+          padding:0;
+          margin: 0;
+        }
+        #box {
+          width: 200.2px;
+          height: 200px;
+          background: green;
+          border: 10px solid yellow;
+          padding:20px;
+          margin: auto;
+          line-height: 300px;
+          overflow: auto;
+        }
+        p{
+           margin: auto;
+            width: 100px;
+            height: 500px;
+            background: red;
+            /* border: 5px solid aqua; */
+        }
+      </style>
+</head>
+<body>
+    
+    <div id="box">
+        <!-- hjsvfkjsafjdsfjdvhfscsdj<br/>
+        sjgsajfgdgfdgfjagksjd  -->
+        <p></p>
+      </div>
+</body>
+</html>
+<script>
+    /*
+     js的盒子模型
+    一共有四大系列共13个
+    client
+        clientWidth clientHeight clientLeft clientTop
+    offset
+        offsetWidth offsetHeight offsetLeft offsetTop offsetParent
+    scroll
+        scrollTop scrollLeft scrollWidth scrollHeight
+    
+    getComputedStyle(ele) 
+
+    client系列
+        特点：获取的值都是number数据类型 如果获取的值是小数 他会给向上取整
+              内容是否溢出对其没有影响
+    获取当前盒子可视区域的宽高
+        clientWidth：当前盒子可视区域的宽度（width+左右的padding）
+        clientHeight：当前盒子可视区域的高度（height+上下的padding）
+    获取当前盒子边框的宽度
+        clientLeft：当前盒子左边框的宽度（左border）
+        clentTop:当前盒子上边框的宽度（上border）
+    */
+
+   // 获取浏览器可视区域的宽高
+//    let winH=document.documentElement.clientHeight||document.body.clientHeight;
+//    let winW=document.documentElement.clientWidth||document.body.clientWidth;
+
+//    console.log(winH);
+//    console.log(winW);
+//    console.log(box.clientWidth);
+//    console.log(box.clientHeight);
+
+/*
+
+offset系列
+    获取当前盒子的总宽高
+    offsetWidth：获取当前盒子的总宽度（clineWidth+左右border）
+    offsetHeight：获取当前盒子额总高度（clientHeight+上下的border）
+
+    offsetLeft:当前盒子距离父级参照物的左偏移量（当前盒子的外边框到父级内边框的距离）
+    offsetTop:当前盒子距离父级参照物的上偏移量
+    offsetParent：当前盒子父级的参照物
+    当前盒子的父级参照物是谁，要取决于当前盒子的所有的父元素中，从里往外一层一层查找
+    看谁有position定位，谁就是他的父级参照物
+    body的父级参照物是null
+*/
+console.log(box.offsetWidth);
+console.log(box.offsetHeight);
+
+// 封装一个获取盒子的距离body的偏移量的方法
+// 现在不管你的父级参照物是谁，你就先获取一下当前盒子距离父级参照物的距离然后在加上父级参照物的border，
+// 然后在看看你的父级参照物的父级参照物是不是body，如果不是body就继续上边的累加，如果是那就结束，
+function offset(box){
+ let left=box.offsetLeft;
+ let top=box.offsetTop;   // 一上来不管三七二十一先获取一下当前元素距离父级参照物的偏移量
+ let parent=box.offsetParent; // 然后在获取一下当前元素的父级参照物
+ while(parent!==document.body){// 如果当前元素的父级参照物不是body那就要进行累加操作
+    left+=parent.offsetLeft+parent.clientLeft;
+    top+=parent.offsetTop+parent.clientTop;
+    parent=parent.offsetParent;// 再次获取当前父级参照物的父级参照物
+ }
+ return{
+    left,top
+ }
+}
+let res=offset(box);
+console.log(res);
+
+
+/*
+scroll系列
+ 获取当前元素的真实宽高
+
+    scrollHeight：获取当前元素的真实高度（如果当前盒子的内容没有溢出
+    那就和clientHeight相等),如果溢出了就等于上padding+内容的真实高度
+    【如果当前盒子设置了overflow：hidden 那scrollHeight就等于上下padding+溢出内容的真实高度 】
+
+    scrollWidth：获取当前元素的真实高度（如果当前盒子的内容没有溢出
+    那就和clientWidth相等),如果溢出了就等于上padding+内容的真实高度
+    【如果当前盒子设置了overflow：hidden 那scrollWidth就等于左右padding+溢出内容的真实高度 】
+*/
+
+// 以上的十一个个属性 都是只读属性，不可以设置
+/*
+scrollTop scrollLeft
+当前盒子的滚动条卷曲的高度和宽度
+scrollTop：获取和设置当前盒子纵向滚动条卷曲的高度
+scrollLeft：获取和设置当前盒子横向滚动条卷曲的宽度
+
+*/
+    let winT = document.documentElement.scrollTop || document.body.scrollTop;
+    let winL = document.documentElement.scrollLeft || document.body.scrollLeft;
+    console.log(winT,winL);
+
+    //临界值
+    // min = 0
+    // max = scrollHeight - clientHeight
+
+//封装一个方法专门用来设置或者获取浏览器的某些属性
+function win(attr,value){
+if(value==undefined){
+ return document.documentElement[attr] || document.body[attr];
+}
+document.documentElement[attr]=value;
+document.body[attr]=value;
+
+}
+win("srcollTop",100)//设置
+console.log();
+
+</script>

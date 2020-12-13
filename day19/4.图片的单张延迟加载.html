@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #box {
+            width: 300px;
+            height: 200px;
+            margin: 800px auto;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img src="default.jpg" true-img="2.jpg" alt="">
+    </div>
+</body>
+
+</html>
+<script src="utils.js"></script>
+<script>
+    let box = document.getElementById("box");
+    let img = document.getElementsByTagName("img")[0];
+    function check() {
+
+        if (img.flag) {
+            return;
+        }
+
+        let boxH = box.offsetHeight;//当前图片盒子的总高度
+        let boxT = utils.offset(box).top;//获取当前图片盒子的距离body的上偏移量
+
+        let winH = utils.win("clientHeight");
+        let winT = utils.win("scrollTop");
+        if (winH + winT >= boxH + boxT) {
+            console.log(100); 
+            let trueimg = img.getAttribute("true-img");
+
+            let newImg = new Image;
+            newImg.src = trueimg;
+            newImg.onload = function () {
+                img.src = trueimg;
+                img.flag = true;
+                fadeIn(img);
+            }
+
+            newImg.onerror=function(){
+                console.log(100);
+                img.src='img/1';
+                img.flag=true;
+            }
+
+
+        }
+
+        function fadeIn(img) {
+            img.style.opacity = 0.01;
+            let num = Number(img.style.opacity);
+            let timer = setInterval(() => {
+                num += 0.01;
+                img.style.opacity = num;
+                if (num >= 1) {
+                    clearInterval(timer);
+                }
+            }, 25)
+        }
+
+    }
+    window.onscroll = check;
+</script>

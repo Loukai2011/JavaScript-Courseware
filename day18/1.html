@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         let time = '2019-12-3 12:10:3';
+
+    function timeFormat() {
+
+      let timeAry = this.match(/\d+/g);
+       console.log(timeAry)
+       let template="0年1月2日 3时4分5秒"
+      template = template.replace(/(\d)/g, (...ary) => {
+        // let [, index] = ary;
+        // let time = timeAry[index] || '00'; 
+        // time = time.length<2 ?'0' + time:time; 
+        console.log(ary[0])
+        return timeAry[ary[0]];
+      });
+      return template;
+
+    }
+    String.prototype.timeFormat = timeFormat;
+    let res = time.timeFormat();
+    console.log(res);
+    </script>
+</body>
+</html>

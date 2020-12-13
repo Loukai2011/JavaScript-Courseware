@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: rgb(255, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="width: 300px;"></div>
+</body>
+</html>
+<script>
+    //元素的样式
+    //ele.style:获取或者设置元素的行间样式
+    //获取的值都是字符串类型 
+    //样式的名字必须是驼峰命名法 box.backgroundColor
+
+    //getcomputedStyle:获取当前元素计算后的样式，他是window上的一个方法(只能获取不能设置)
+   // getComputedStyle(ele,"伪类")：返回值是一个对象 对象里就是当前元素计算后的样式
+   //如果当前样式名不是一个单词 ，也要用驼峰命名法来获取
+
+//    console.log(getComputedStyle(box));
+//    console.log(getComputedStyle(box).width);
+//    console.log(getComputedStyle(box).backgroundColor);
+    //getComputedStyle 在IE6-8 下不能使用 
+    //在IE下有专门的属性来获取元素的计算后的样式
+    //  ele.currentStyle 他是一个属性，里面存储的是当前元素所有的计算后的样式
+
+
+    //封装 获取或者设置CSS样式的一些方法
+    function getCss(ele,attr){
+        var value=null;
+
+       if("getComputedStyle"in window){
+           value=getComputedStyle(ele)[attr];//检测当前getComputedStyle在浏览器下能不能用
+       }
+       else{
+        value=ele.currentStyle[attr];
+       }
+        var reg= /^(width|height|padding|margin|fontSize|lineHeight|left|top|right|bottom|opacity)$/;
+        //把这些以后可能会累加的样式转换成数字
+        if(reg.test(attr)){
+            value=parseFloat(value);
+        }
+
+       return value;
+    }
+    let w=getCss(box,"width");// 返回值是字符串类型
+    console.log(w);
+
+     
+
+
+   //setCss 设置
+   function setCss(ele,attr,value){
+    //1.先确定当前的样式需不需要加单位
+    //2.确定当前的样式用户有没有给单位
+    var reg= /^(width|height|padding|margin|fontSize|lineHeight|left|top|right|bottom|opacity)$/;
+    if(reg.test(attr)){
+        let number = parseFloat(value); // '100'
+        ele.style[attr] = number + 'px';
+    }
+    ele.style[attr] = value;
+   }
+
+//    setCss(box,'width','300px')
+ 
+
+   function setGroupCss(ele,obj){
+
+       for(var key in obj){
+           if(!obj.hasOwnProperty(key)) return;
+           setCss(ele,key,obj[key]);
+       }
+   }
+
+   setGroupCss(box,{
+       'width':400,
+       'height':400,
+       'backgroundColor':'blue'
+   });
+
+
+
+
+
+function css(){
+//通过判断用户传参的个数和传递参数的类型 就能判断出用户的意图
+    let [ele,attr,value]=arguments; 
+    if(arguments.length===2){
+        if(typeof attr==="object"){
+            setGroupCss(ele,attr);
+        }
+       else{
+           return getCss(ele,attr)
+       }
+    }
+    if(arguments.length===3){
+       setCss(ele,attr,value);
+    }
+}
+css(box,'width');
+css(box,'width',600);
+css(box,{
+    'width':300,
+    'height':300,
+    'backgroundColor':'blue'})
+</script>

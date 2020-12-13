@@ -21,15 +21,15 @@
                     <b class="iconfont icon-xiajiantou arrowDown"></b>
                 </div>
             </a>
-            <a href="javascript:;" sortFlag="hot">
-                <span>热度</span>
+            <a href="javascript:;" sortFlag="price">
+                <span>价格</span>
                 <div class="arrows">
                     <b class="iconfont icon-shang arrowUp"></b>
                     <b class="iconfont icon-xiajiantou arrowDown"></b>
                 </div>
             </a>
-            <a href="javascript:;" sortFlag="price">
-                <span>价格</span>
+            <a href="javascript:;" sortFlag="hot">
+                <span>热度</span>
                 <div class="arrows">
                     <b class="iconfont icon-shang arrowUp"></b>
                     <b class="iconfont icon-xiajiantou arrowDown"></b>
@@ -48,97 +48,6 @@
 
                 </p>
             </li>
-            <!-- <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li>
-            <li>
-                <img src="../img/1.jpg" alt="">
-                <p class="title">HUAWEI全网通版(亮黑色)</p>
-                <p>2017-03-15</p>
-                <p class="numInfo">
-                    <span>999元</span>
-                    <span>99</span>
-
-                </p>
-            </li> -->
-
 
         </ul>
     </div>
@@ -148,25 +57,29 @@
 <script>
     var data = null;
     var str = ``;
+    var xhr = new XMLHttpRequest();
     var lists = document.getElementById("lists");
     var lis;
-    var xhr = new XMLHttpRequest();
+
     xhr.open("get", "data.json", true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && /^2\d{2}/.test(xhr.status)) {
             data = JSON.parse(xhr.responseText);
-            bindHTML(data);
+            bindHtml(data);
+           
+           
         }
     }
     xhr.send();
-    function bindHTML(data) {
+
+    function bindHtml(data) {
         data.forEach(function (item, index) {
             str += `<li time="${item.time}" price="${item.price}" hot="${item.hot}">
                 <img src="../${item.img}" alt="">
                 <p class="title">${item.title}</p>
-                <p>生产日期：${item.time}</p>
+                <p>${item.time}</p>
                 <p class="numInfo">
-                    <span>￥：${item.price}</span>
+                    <span>价格：${item.price}</span>
                     <span>热度：${item.hot}</span>
 
                 </p>
@@ -174,49 +87,53 @@
         });
         lists.innerHTML = str;
         lis = Array.from(document.querySelectorAll("li"));
+   
     }
-    var links = document.querySelectorAll("a");
-    for (var i = 0; i < links.length; i++) {
-        links[i].flag = -1;
-        links[i].onclick = function () {
-            var that = this;
-            this.flag = this.flag * -1;
+
+    var as = document.querySelectorAll("a");
+    for (var i = 0; i < as.length; i++) {
+        as[i].flag = -1;
+   
+
+        as[i].onclick = function () {
+            for(var i=0;i<as.length;i++){
+               if(as[i]!==this){
+                   as[i].flag=-1;
+               }
+           }
+          
+            var that=this;
+            // debugger;
+            this.flag *= -1;
             var sortFlag = this.getAttribute("sortFlag");
-            var frg = document.createDocumentFragment();
+            // console.log(sortFlag);
+            // debugger;
             if (sortFlag == "time") {
-                lis.sort(function (a, b) { return (a.getAttribute(sortFlag).replace(/-/g, "") - b.getAttribute(sortFlag).replace(/-/g, "")) * that.flag });
+                lis.sort(function(a,b){
+                    return (a.getAttribute(sortFlag).replace(/-/g,"") - b.getAttribute(sortFlag).replace(/-/g,""))*that.flag;
+                })
+            }else{
+                lis.sort(function(a,b){
+                    return (a.getAttribute(sortFlag) - b.getAttribute(sortFlag))*that.flag;
+                })
             }
-            else if (sortFlag == "price") {
-                lis.sort(function (a, b) { return (a.getAttribute(sortFlag) - b.getAttribute(sortFlag)) * that.flag });
-            }
-            else {
-                lis.sort(function (a, b) { return (a.getAttribute(sortFlag) - b.getAttribute(sortFlag)) * that.flag });
-            }
+
             for (var i = 0; i < lis.length; i++) {
-                frg.appendChild(lis[i]);
-            }
-            lists.appendChild(frg);
-
-            var cus = document.querySelectorAll(".current");
-            for (var i = 0; i < cus.length; i++) {
-                cus[i].classList.remove("current")
-            }
-            for (var i = 0; i < links.length; i++) {
-                if (links[i] != this) {
-                    links[i].flag = -1;
-                }
+                lists.appendChild(lis[i]);
             }
 
-            var arrowAry = this.querySelectorAll("b");
-            if (this.flag == 1) {
-                arrowAry[0].classList.add("current");
+
+            var bs=this.querySelectorAll("b");
+            var cus=document.querySelectorAll(".current");
+            for(var i=0;i<cus.length;i++){
+                cus[i].classList.remove("current");
+            }
+            if(this.flag==1){
+                bs[0].classList.add("current");
             }
             else {
-                arrowAry[1].classList.add("current");
+                bs[1].classList.add("current");
             }
-
-
-
 
 
         }

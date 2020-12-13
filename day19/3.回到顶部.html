@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+      #back{
+          position: fixed;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background-color: yellowgreen;
+          text-align: center;
+          line-height: 100px;
+          bottom: 20px;
+          right: 20px;
+          cursor: pointer;
+          display: none;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./1.png" alt="">
+        <img src="./1.png" alt="">
+        <img src="./1.png" alt="">
+        <img src="./1.png" alt="">
+        <img src="./1.png" alt="">
+        <div id="back">
+            回到顶部
+        </div>
+    </div>
+    
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+  let back=document.getElementById("back");
+  console.log(back);
+  back.onclick=function(){
+   // utils.win("scrollTop",0);
+
+    let winT=utils.win("scrollTop");//获取当前浏览器滚动卷曲的高度
+     //把当前浏览器滚动条卷曲的高度平均分成50份
+    let part=winT/50;
+    let timer=setInterval(()=>{
+       winT-=part;
+       utils.win("scrollTop",winT);
+     if(winT<=0){
+         clearInterval(timer);
+     }
+    },20)
+  }
+
+let winH=utils.win("clientHeight");//当前浏览器可视区域的高度
+window.onscroll=check;
+
+function check(){
+    //当浏览器滚动条卷曲的高度大于等于一屏的高度时 开始执行
+   
+    let winT=utils.win("scrollTop");//获取当前浏览器滚动条卷曲的高度
+
+    if(winT>winH){
+        back.style.display="block";
+    }
+    else{
+        back.style.display="none";
+    }
+}
+</script>
