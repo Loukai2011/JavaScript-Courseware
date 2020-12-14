@@ -1,4 +1,6 @@
 let uls=document.querySelectorAll("ul");
+let imgs=document.getElementsByClassName("bg");
+
 uls=Array.from(uls);
 function getData(){
     let data=null;
@@ -40,7 +42,7 @@ function renderHtml(data){
     }
 }
 
-let imgs=document.getElementsByClassName("bg");
+
 function delay(){
     // debugger;
     for(let i=0;i<imgs.length;i++){

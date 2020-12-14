@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //自己封装call方法
+    function fn(){
+        console.log(this.name);
+    }
+    let obj={name:100};
+    Function.prototype.Mycall=function(obj){
+     
+        obj.$fn=fn;
+        obj.$fn();
+        delete obj.$fn;
+    }
+   Mycall();
+    </script>
+</body>
+</html>
