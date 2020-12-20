@@ -128,9 +128,24 @@ function isButtonShow() {
         utils.css(back, "display", "none");
     }
 }
-window.onscroll = function () {
-    delay();
+// window.onscroll = function () {
+//     delay();
+//     isLoad();
+//     isButtonShow()
+// }
+function fn(){
     isLoad();
-    isButtonShow()
+    delay();
+    isButtonShow();
 }
-
+function throttle(fn,time){
+    let previous=0;
+    return function(){
+        let now=Date.now();
+        if(now-previous>=time){
+            fn.call(this);
+            previous=now;
+        }
+    }
+}
+window.onscroll=throttle(fn,300);

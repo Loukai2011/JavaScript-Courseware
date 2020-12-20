@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            border-radius: 50%;
+            left: 0;
+            position: absolute;
+        }
+
+        button {
+            position: absolute;
+            top: 300px;
+            width: 100px;
+        }
+
+
+        button:nth-child(1) {
+            left: 0
+        }
+
+        button:nth-child(2) {
+            left: 150px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <button id="right">往右</button>
+    <script>
+        let box = document.getElementById("box");
+        let right = document.getElementById("right");
+
+        function linear(t, d, c, b) {
+            return t / d * c + b
+            /* 
+            t:time已经运动的时间
+            d:duration:总时间
+            c:change总距离
+            b:begin起始的位置
+            */
+               // 时间比 === 路程比
+    // 已经走过的时间/总时间 === 已经走过的路程/总路程
+    // t：已经走过的时间
+    // d:总时间
+    // change:总路程
+    // x:当前应该到达的位置
+        }
+
+        let duration = 3000;
+        let time = 0;
+        function animate(ele, target, duration, callBack) {
+            /*ele 代表页面中的元素 让这个元素怎么移动
+              target 代表用户给的数据，怎么 变化
+              duration 代表时间
+              callBack 代表一个函数 指当动画完成后 需要执行的一个函数        
+            */
+            let change = {}; //到用户指定的地方的 路程
+            let begin = {};// box 在没有移动之前的初始值
+            
+            for (let key in target) {
+                begin[key] = parseFloat(getComputedStyle(ele)[key]);
+                //通过for in 循环 往begin对象里 添加键值对 获取 初始值
+
+                change[key] = target[key] - begin[key];
+                //通过for in 循环 change 添加键值对 获取 要变化的参数 
+            }
+            console.log(change);
+            let time = 0;
+            let timer = setInterval(() => {
+                time += 17;
+                if (time >= duration) {
+                    clearInterval(timer);
+                    for (let key in target) {
+                        //给元素的额每一个样式设置最终的target 值
+                        ele.style[key] = target[key] + 'px';
+                        ele.style.backgroundColor = 'yellow';
+
+                    }
+                    //callBack();//传入的函数执行
+                    return;
+                }
+                for (let key in target) {
+                    ele.style[key] = linear(time, duration, change[key], begin[key]) + 'px';
+                }
+            }, 17)
+
+        }
+
+
+        let target = {//用户指定的内容
+            width: 500,
+            height: 600,
+            left: 500,
+            top: 500
+        };
+       right.onclick=function(){
+        animate(box, target, 3000);
+       }
+
+    </script>
+</body>
+
+</html>

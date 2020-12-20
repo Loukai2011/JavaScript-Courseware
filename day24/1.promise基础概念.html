@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       /*
+       promise 就是一个状态机
+       他就是把异步的代码用同步的方式展现出来
+    // promise有三种状态，当把promsie的实例创建出来的时候默认是pending等待态
+    // pending-->fulfilled
+    // pending-->rejected
+    // 当newpromise的时候传递一个回调函数，这个回调函数里有两个形参resolve,reject,而且这两个形参是函数
+    // 当resolve函数执行的时候，promise的实例的状态会变成成功态(fulfilled)
+    // 当reject函数执行的时候，promise的实例的状态会变成失败态(rejected)
+
+
+
+
+
+       //then 是当前promise原型上的方法，可以传递两个回调函数，分别对应实例的成功态执行的函数
+       和失败态执行的函数
+       还可以连then
+       下一个then中的回调函数怎么执行，你要看上一个then中的回调函数 执行的时候有没有返回新的promise的实例
+       如果返回了 那下一个then中的回调函数的执行 就受当前promise实例状态的管控
+
+       如果没有返回promise实例，那下一个then中的回调函数 会默认执行第一个
+       */ 
+
+    //    let p1=new Promise((resolve,reject)=>{
+    //        //用一个异步的代码来改变状态
+    //        console.log(300);
+    //        resolve();
+    //    });
+    //    p1.then(()=>{console.log(100);},()=>{console.log(300);}).then(()=>{console.log(500);});
+//------------------------------------------------------------------------------------------------------------------
+       //catch是原型上的一个方法，当任何一个promise的实例是失败态的时候就会执行catch函数
+       //finally也是原型上的一个方法，他不管promise对象 最后状态如何 都会执行
+       //在finally里拿不到当前promise的状态 
+       let p1=new Promise((resolve,reject)=>{
+           //如果回调函数执行的时候发生了错误 ，那当前的promise 得实例就会变成失败态，并不会阻止代码的运行
+           console.log(a);
+        
+       });
+       p1.then((res)=>{console.log(100);},(res)=>{console.log(300);})
+//----------------------------------------------------------------------------------------------------------------------
+    //3.Promise.all方法
+    let p1 = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          // resolve(100)
+          reject(8888)
+        },2000)
+    });
+    let p2 = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          // resolve(200)
+          reject()
+        },2000)
+    });
+    let p3 = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          resolve(300)
+        },2000)
+    });
+    // 我要等到当前三个异步的请求全部请求成功以后再做什么事
+    let p = Promise.all([p1,p2,p3]);// all方法在promise类自己身上
+    // all会返回一个新的promise实例，这个实例的状态会等到上面三个promise的实例全部成功以后，才会成功
+    //如果三个小的实例，有一个失败了，那p的状态 就是失败态
+    //promise.all 的参数不一定是promise的实例，是别的值也行
+    //它内部会把当前的值装换成 成功态的的promise实例
+    p.then((res)=>{
+      console.log(res,'全部成功了');
+    }).catch((res)=>{
+      console.log(有失败的);
+    })
+
+    //------------------------------------------------------------------------------------------
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve(100);
+        reject(8888)
+      }, 1000)
+    });
+    let p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(200)
+        // reject()
+      }, 2000)
+    });
+    let p3 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(300)
+      }, 3000)
+    });
+    let p = Promise.race([p1,p2,p3]);
+    // 只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。
+    p.then((res)=>{
+      console.log(res,'成功');
+    }).catch((res)=>{
+      console.log(res,'失败');
+    });
+    //----------------------------------------------------------------------------------------------------------
+        // Promise.resolve() // 快速创建成功的实例
+    // Promise.reject() // 快速创建失败的实例
+    let pp = Promise.resolve(100); // 他的返回值就是一个已经成功的promise的实例(快速创建一个成功的实例)
+
+    pp.then((res)=>{
+      console.log(res);
+    })
+
+    // let pp = new Promise((resolve,reject)=>{
+    //   resolve(100)
+    // })
+
+    </script>
+</body>
+</html>

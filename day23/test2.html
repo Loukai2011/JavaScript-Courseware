@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            border-radius: 50%;
+            left: 0;
+            position: absolute;
+        }
+
+        button {
+            position: absolute;
+            top: 300px;
+            width: 100px;
+        }
+
+        button:nth-child(1) {
+            left: 0
+        }
+
+        button:nth-child(2) {
+            left: 150px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <button id="right">往右</button>
+    <script>
+        let box=document.getElementById("box");
+        let right=document.getElementById("right");
+        function linear(t,d,c,b){
+            return t/d*c+b
+        }
+        let time=0;
+        
+        function animate(ele,target,duration){
+          let change={};
+          let begin={};
+          for(let key in target){
+              begin[key]=parseFloat(getComputedStyle(ele)[key]);
+              change[key]=target[key]-begin[key];
+          }
+  
+          let timer=setInterval(()=>{
+              time+=17;
+           if(time>=duration){
+               clearInterval(timer);
+               for(let key in target){
+                ele.style[key]=target[key]+'px';
+               }
+               return  
+           }
+
+           for(let key in target){
+               ele.style[key]=linear(time,duration,change[key],begin[key])+"px";
+           }
+
+          },17)
+        }
+        let target={
+            width:500,
+            height:600,
+            left:500,
+            top:500
+        }
+        right.onclick=function(){
+            animate(box,target,3000);
+        }
+    </script>
+
+</body>
+</html>

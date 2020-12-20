@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">
+  </div>
+  <script>
+    // DOM0级事件绑定和DOM2级事件绑定
+
+    // 给当前元素绑定事件行为，
+    // 每一个元素身上都会有onclick属性，绑定事件的过程就是给其属性赋值的过程
+    // 元素.onclick = function(){}
+    // box.onclick = function(){
+    //   console.log(100);
+    // }
+    // box.onclick = function(){
+    //   console.log(200);
+    // }
+    // 特点：不能给元素的同一个事件类型绑定多个方法
+    // 给当前元素的某个事件类型卸载对应的方法
+    // box.onclick = null;
+    //----------------------------------------------------------------------
+    // DOM2级事件绑定
+    // 元素.addEventListener('事件类型',函数,布尔)
+    function fn() { // af0
+      console.log(800);
+      console.log(this);
+    }
+    function fn1() {
+      console.log(800);
+    }
+    box.addEventListener('click', fn);
+    box.addEventListener('click', fn1);
+    box.addEventListener('click', fn);
+    // 当前DOM2级事件绑定是把当前addEventListener执行的时候传递的函数放到对应的事件池子里边,但是当放池子里存放方法的时候会存在“去重的”操作
+    // 利用DOM2级事件绑定给元素的某一个事件类型绑定方法的时候不可以绑定同一个方法
+    // 当事件池子里的事件触发的时候，先绑定的哪个方法就先执行哪个方法
+
+    //  'click' [af0,af1,af2]
+    //  'mouseover' [af4]
+
+
+
+    window.addEventListener('DOMContentLoaded', function () {
+      console.log(100);
+    }); // 会等到当前页面的dom加载完成之后就会执行
+    console.log(99999);
+    window.addEventListener('load', function () {
+      console.log(200);
+    }); // 等到页面中的所有资源全部加载完成之后才执行
+
+
+  </script>
+
+</body>
+
+</html>

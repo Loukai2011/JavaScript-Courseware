@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        line-height: 100px;
+        text-align: center;
+        margin: 800px 0 0 0;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">点我啊</div>
+    <script>
+      let box=document.getElementById("box");
+      let num=0;
+      function fn(){
+          console.log(++num);
+      }
+      //非立即执行的定时器版的防抖函数：
+      //当点击按钮触发事件的时候，debounce返回的函数执行
+      //让函数执行的时候会先把上一次的定时器清除
+      //然后在重新开启一个新的定时器，以此类推
+      //直到用户点击结束，这时候当前作用域内只会留下最后一个定时器
+      //到达规定的时间之后执行
+    //   function debounce(fn,time){
+    //       let timer;//准备接受定时器的返回值
+    //       return function(){
+    //           clearTimeout(timer);
+    //           timer=setTimeout(()=>{
+    //               fn.call(this);
+    //           },time)
+    //       }
+    //   }
+    //   box.onclick=debounce(fn,1000);
+    
+      //立即执行的定时器版的防抖函数
+      //当第一次事件触发函数的时候，timer是undefined，那么now就是布尔取反是true
+      //所在的if语句条件成立，fn执行  计时器也在计时 
+      //但是 在还没有 等到计时器走完 把timer赋值为空
+      //用户就再次点击的话 timer 因为第一次点击过 不再是undefined 布尔取反就是true if条件不成立 不走
+      //同时也再次触发函数 第一步就是清除了计时器  但是下一步又触发了计时器
+      //只有点击后 等计时器 完成后 把timer赋值为空 
+      //说白了 就是 点击第一次 我输出  必须要等一秒以后再点击 我才会输出
+      //如果点击一次后 不断点击 只有等最后一次点击结束后 等1秒后 再执行
+    //   function debounce(fn,time){
+    //       let timer;
+    //       return function(){
+    //           clearTimeout(timer);
+    //           let now=!timer;
+    //           timer=setTimeout(()=>{
+    //               timer=null;
+    //           },time);
+    //           if(now){fn.call(this);}
+    //       }
+    //   }
+
+    //   box.onclick=debounce(fn,1000);
+     //封装一个既可以立即执行的还可以非立即执行的防抖函数
+    // function debounce(fn, time, immediate) {
+    //   let timer;
+    //   return function () {
+    //     if (immediate) {
+    //       clearTimeout(timer);
+    //       let now = !timer; // true 
+    //       timer = setTimeout(() => {
+    //         timer = null;
+    //       }, time);
+    //       if (now) { fn.call(this) };
+    //     }
+    //     else {
+    //       clearTimeout(timer);
+    //       timer = setTimeout(() => {
+    //         fn.call(this);
+    //       }, time);
+    //     }
+    //   }
+    // }
+    // box.onclick = debounce(fn, 1000,true);
+    // box.onmouseover = debounce(fn, 1000,true);
+
+
+
+    
+    // 节流
+
+    /*
+     高频事件可以连续触发，但在n秒内只会执行一次，所以节流会稀释
+     函数的执行频率 ，但是函数可以一直执行    
+
+     思路：当滑轮触动这个事件时 传递一个 人为设置的一个时间值fn会立即执行
+           当再次触发的时候 利用与Date.now() 的时间差 判断
+           是否为你设置的时间差 如果不是 不能执行fn
+           当时间差 满足时 才会再次 触发函数fn
+    */
+
+    //立即执行的时间戳
+
+    function throttle(fn,time){
+        let previous=0;
+        return function(){
+            let now=Date.now();
+            if(now-previous>=time){
+                fn.call(this);
+                previous=now;
+            }
+        }
+    }
+    window.onscroll = throttle(fn,1000);
+
+    //非立即执行的定时器版
+    /*
+     当鼠标滑动时 会触发函数 fn执行
+     如果 连续滑动 在不断触发这个事件
+     timer就不会 赋值为null fn函数就不会 再次执行
+     
+     必须第一次滑动后 等待设置的1s后 计时器走完 把timer的值 赋值为null
+     判断才会成立 进去执行语句 让 fn执行
+     再次滑动时 必须你上一次滑动时 时间间隔一秒 fn才会执行 
+    */
+
+    // function throttle(fn,time){
+    //   let timer;
+    //   return function(){
+    //     if(!timer){
+    //       timer=setTimeout(()=>{
+    //         timer=null;
+    //         fn.call(this);
+    //       },time)
+    //     }
+    //   }
+    // }
+    // window.onscroll = throttle(fn,1000)
+    </script>
+</body>
+</html>
