@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* transform: translate(-50%, -50%); */
+        }
+        #inner{
+            width: 50px;
+            height: 50px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">121
+    <div id="inner">
+
+    </div>
+    </div>
+    <script>
+        let box=document.getElementById("box");
+        box.onclick=function (e){
+            // e.cancelBubble = true;
+        //当前用户通过键盘 或者鼠标去触发 一些对应的事件的时候，浏览器会把当前事件的一些信息以实参的方式 传递给当前的方法
+              // 当用户通过键盘或者鼠标去触发一些对应的事件的时候，浏览器会把当前事件的一些信息以实参的形式传递给当前的方法
+      // 1.clientX:当前鼠标点击的位置距离浏览器左侧的长度
+      // 2.clientY:当前鼠标点击的位置距离浏览器上侧的高度
+
+      // 3.offsetX：当前鼠标点击的位置距离当前的盒子的最左侧的长度
+      // 4.offsetY：当前鼠标点击的位置距离当前的盒子的最上侧的高度
+       // 5.pageX：当前鼠标点击的位置距离body的最左侧的长度
+      // 6.pageY：当前鼠标点击的位置距离body顶部的高度
+      // (相对于当前的body来说的)
+
+      // 7.target：目标源，当前点击的是哪个元素，target就是谁
+      // 8.type:事件类型
+
+      // 9.e.cancelBubble = true // 关闭冒泡机制 粘在自己身上 让其他的不冒泡
+      //10 e.//组织冒泡传播
+
+
+      console.log(1);
+
+        }
+        inner.onclick=function(e){
+            e.cancelBubble = true
+            console.log(2);
+
+        }
+    </script>
+</body>
+</html>

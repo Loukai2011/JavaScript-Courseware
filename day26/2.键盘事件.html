@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inp">
+    <script>
+let inp=document.getElementById('inp');
+// inp.onkeydown=function(){
+//     console.log('按下'+this.value);
+//     //在此函数里拿到的input框的值是上一次的值，因为当前按下的那一次此函数已经就触发了
+//     //那时候最新的内容还没有输入到input框里
+
+// }
+// inp.onkeypress=function(){
+//     // console.log('press');
+// }
+// inp.onkeyup=function(){
+// console.log('抬起'+this.value);
+// // 在此函数里拿到的是最新的内容，因为当此函数执行的时候，内容已经输入完了
+// }
+// //键盘事件可以给表单元素绑定，这时候的事件仅仅是针对于当期的表单元素的，只有 光标在input框里的时候
+// //才会触发对应的事件。但是如果给window或者body绑定了点击事件，那你在哪里敲击键盘都会触发这些键盘事件
+// //div p 不能绑定键盘事件
+//------------------------------------------------------------------------
+document.body.onkeyup=function (e){
+    console.log(e);
+    //e是当前事件的事件对象，只有键盘上的事件对象里 才会有keyCOde这些属性，分别代表了当前点击的键的一些标识
+    //当用户点击键盘的时候，通过keyCode判断一下 当前用户点击的到底是那个键 从而让你的盒子左右上下移动
+}
+    </script>
+</body>
+</html>

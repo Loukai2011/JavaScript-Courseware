@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* transform: translate(-50%, -50%); */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+
+    let box = document.getElementById('box');
+    document.body.onkeydown = function (e) {
+        let H=document.documentElement.clientHeight-box.offsetHeight;
+        let W=document.documentElement.clientWidth-box.offsetWidth;
+        let css = getComputedStyle(box);
+        let top = parseFloat(css.top)
+        let left = parseFloat(css.left)
+        
+        let keyCode = Number(e.keyCode);
+        switch (keyCode) {
+            case 38:
+                top -= 10;
+                if(top<=0){
+                   top=0;
+                }
+                break;
+            case 40:
+                
+                top+=10;
+                if(top>H){
+                    top=H;
+                }
+                break;
+            case 37:
+
+                left-=10;
+                if(left<=0){
+                   left=0;
+                }
+                break
+            case 39:
+                left+=10;
+                if(left>=W){
+                   left=W;
+                }
+                break
+            default:
+                break;
+
+        }
+        box.style.top = top + 'px';
+        box.style.left = left + 'px';
+
+    }
+
+</script>
+
+</html>
