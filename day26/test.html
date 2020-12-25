@@ -1,76 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
+        *{
             margin: 0;
             padding: 0;
         }
-
-        #box {
+        #box{
             width: 100px;
             height: 100px;
-            position: absolute;
-            background-color: purple;
+            background-color: blue;
         }
     </style>
 </head>
-
 <body>
     <div id="box">
-
+           
     </div>
     <script>
-        let box = document.getElementById('box');
-
-        document.body.onkeydown = function (e) {
-            let css = getComputedStyle(box);
-            let top = parseFloat(css.top);
-            let left = parseFloat(css.left);
-            let keyCode = e.keyCode;
-            let maxWidth=document.documentElement.clientWidth-box.offsetWidth;
-            let maxHeight=document.documentElement.clientHeight-box.offsetHeight;
-         
-            switch (keyCode) {
-                case 38:
-                    top -= 10;
-                    if(top<=0){
-                        top=0;
-                    }
-
-                    break;
-                case 40:
-                    top += 10;
-                     if(top>=maxHeight){
-                       top=maxHeight;
-                     }
-                    break;
-                case 37:
-                    left -= 10;
-                    if(left<=0){
-                        left=0;
-                    }
-
-                    break;
-                case 39:
-                    left += 10;
-                     if(left>=maxWidth){
-                         left=maxWidth;
-                     }
-                    break;
-
-                default:
-                    break;
-            }
-            box.style.left=left+'px';
-            box.style.top=top+'px';
+        let box=document.getElementById('box');
+        function fn(){
+            console.log('fn');
         }
+        function fn2(){
+            console.log('fn2');
+        }
+        box.addEventListener('click',fn);
+        box.addEventListener('click',fn2);
     </script>
-
 </body>
-
 </html>

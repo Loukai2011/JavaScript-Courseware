@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 数据类型
+    // js中的判断语句和操作语句
+    // 三个判断和三个循环
+    // 逻辑语句
+    // 数据类型转换和比较
+    // if else   三元运算符   switch  case
+
+    // 三元运算符适用于一些简单的判断逻辑语句
+    // switch是绝对比较
+
+    // if(自动转布尔){}
+    // if (xx || xx) {
+
+    // }
+    // if (xx && xx && xx && xx) {
+
+    // }
+
+    // let obj = {
+    //   ary: [1, { s: 100 }]
+    // }
+    // let res = obj.ary[1].s
+
+    // obj = {
+
+    // }
+    // let res = obj.ary && obj.ary[1] && obj.ary[1].s; // 让取值更加严谨
+    // let res = obj.ary || [] // 赋默认值的作用
+    // % 取模 取余数
+
+
+    // 三个循环
+    // for  while   for in
+
+    // for循环可以控制循环的次数
+
+    // while：一般用于不知道循环多少次的循环
+    // 循环走不完代码就不会往下走 阻塞线程
+
+    // for in   遍历对象
+    // 可枚举的属性了
+    // 当前对象自己增加的私有属性
+    // 对象上的原型上你自己增加的属性或者方法
+
+    // 先遍历自己身上的属性，然后在遍历原型上的属性
+
+    // 把其他数据类型转布尔有且只有5种情况是false
+    // 0 null undefined '' NaN    
+
+    // 函数
+    // 函数可以把实现某个功能的代码封装到一起，以后想实现这个功能，就直接执行这个函数就好了
+
+    // function fn(a,b){
+    //   console.log(a+b);
+    // }
+
+    // fn(1,2); // 3
+    // fn(3,4); // 7
+
+    // function fn(index){ // 形参变量
+    //   // 形参是私有变量
+    //   let a = 100;
+    //   function s(){}
+    //   return 1;
+    // }
+
+    // let res = fn(100); // 实参
+    // console.log(res); // un 1 
+
+    // let ary = [1,2,3]; // af0
+    // function fn(arr){ // af0
+    //   arr.push(100);
+    //   return arr // af0
+    // }
+    // let res = fn(ary); // af0
+    // console.log(res); //af0 [1,2,3,100]
+    // console.log(ary); //af0 [1,2,3,100]
+
+    // function fn(f) { // f形参函数
+    //   f(function () { // f执行的实参了
+    //     console.log(100); 
+    //   })
+    // }
+    // fn(function (a) { // a形参接受的是函数
+    //   a()
+    // }) //f对应的实参
+
+
+    // function f(a = 100){
+    //   console.log(a);
+    // }
+    // f()
+
+    // function fn({a,b} = {a:100,b:100}) {
+    //   // let {a,b} = obj // 这句话和形参里的结构是一样的
+    //   console.log(a, b); // 100 200
+    // }
+
+    // fn({});
+    // // fn()
+
+    // // 箭头函数
+
+    // let fn = (...ary)=>{
+    //   // 箭头函数没有this
+    //   // 箭头函数没有arguments
+    // }
+
+
+    // console.log(a);
+    // let a = 100;
+
+    // 
+    // 递归其实就是自己调用自己
+    // 在递归使用的时候都会有结束递归的条件
+    // function fn() {
+    //   console.log(100);
+    //   fn()
+    // }
+    // fn()
+    //-------------------------------------------
+    // 求1-5之间的数的和
+    // function sum(num) {
+    //   if (num > 5) {
+    //     return 0
+    //   }
+    //   if(num%2 == 0){
+    //     return num + sum(num + 1);
+    //   }
+    //   return sum(num + 1);
+    // }
+    // let res = sum(1); // 15
+    // console.log(res); // 就是累加之后的总和
+
+
+    // function sum(1) {
+    //   return 1 + sum(2); // 14
+    // }
+
+    // function sum(2) {
+    //   return 2 + sum(3); // 12
+    // }
+
+    // function sum(3) {
+    //   return 3 + sum(4); // 9
+    // }
+
+    // function sum(4) {
+    //   return 4 + sum(5); // 5
+    // }
+
+    // function sum(5) {
+    //   return 5 + sum(6); // 0
+    // }
+
+    // function sum(6) {
+    //   if (6 > 5) {
+    //     return 0
+    //   }
+    // }
+
+    //----------------------------------------------------
+    //  数组的方法 push pop shift unshift splice sort reverse
+    //     slice join indexOf lastIndexOf
+    //     includes forEach map
+    // filter some every find
+    //---------------------------------------------------
+    // filter 过滤   (返回值是数组)
+    // let ary = [100, 200, 300, 400];
+    // // filter返回值是一个新的数组，数组里边是过滤之后的值
+    // // 把你主要的值留下，不需要的过滤掉
+    // let res = ary.filter((item, index) => {
+    //   return item > 200
+    // });
+
+    // console.log(res); // [300,400]
+    //--------------------------------------
+    // some (找true)找到符合规则的那一项就返回true (返回值是布尔)
+    // 一旦找到符合规则的那一项，回调函数就不会再执行了，那some整体的返回结果就是true(如果数组中所有值都不符合规则，那就返回false)
+    // let ary = [100, 200, 300, 400];
+
+    // let res = ary.some((item, index) => {
+    //   console.log(item);
+    //   return item > 200;
+    // });
+
+    // console.log(res); // true 回调函数执行三次
+
+    //--------------------------------------------
+    // every (找false)只要数组中有一个不满足条件，那整体every就返回false，如果数组的所有项都满足条件，那every就返回true    (返回值是布尔)
+    // 如果发现不满足条件了，那回调函数就不会再执行了
+    // let ary = [100, 200, 300, 400];
+    // let res = ary.every((item, index) => {
+    //   console.log(item);
+    //   return item > 200;
+    // });
+
+    // console.log(res); // false 回调函数执行一次
+
+    //----------------------------------------------
+    // find:发现的意思，就是发现符合规则的那一项，并且作为find的返回值return出去
+    // let ary = [100, 200, 300, 400];
+    // let res = ary.find((item, index) => {
+    //   // console.log(item);
+    //   return item > 200;
+    // });
+    // console.log(res); // 300 回调函数执行三次
+
+
+
+
+
+
+//  字符串的方法  charAt  charCodeAt slice substr substring split toUpperCase toLowerCase indexOf lastIndexOf replace includes trim(去空格) trimLeft  trimRight
+
+//  Math数学对象的方法 max min ceil floor random round abs sqrt
+// pow
+//  Date实例 里边也有方法
+//  let s = new Date()
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

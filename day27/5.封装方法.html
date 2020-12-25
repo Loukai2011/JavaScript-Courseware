@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let ary = [100, 200, 300, 400];
+        function myForEach (callBack) {
+            let ss = []
+            for (let i = 0; i < this.length; i++) {
+                // this[i],i
+                let res = callBack(this[i], i);
+                if (res) {
+                    ss.push(this[i])
+                }
+            }
+            return ss;
+        }
+        Array.prototype.myForEach = myForEach;
+        let res = arr.myForEach((item,index)=>{
+        return item>200
+        });
+
+        // [300,400]
+
+        //myForEach 封装
+        let ary=[1,2,3];
+        Array.prototype.myForEach=myForEach;
+        function myForEach(callBack){
+            for(let i=0;i<this.length;i++)
+            callBack(this[i],i)
+        }
+        
+        ary.myForEach((item,index)=>{
+            console.log(item);
+        });
+       
+
+
+
+        //myMap 方法封装
+        let ary=[1,2,3];
+        Array.prototype.myMap=myMap;
+        function myMap(callBack){
+            let ary=[];
+            for(let i=0;i<this.length;i++){
+               let res=callBack(this[i],i);
+               ary.push(res);
+            }
+            return ary;
+        }
+        ary.myMap((item,index)=>{
+            return item;
+        });
+
+        //myFilter 方法封装
+        let ary=[100,200,300,400];
+        Array.prototype.myFilter=myFilter;
+        function myFilter(callBack){
+            let ary=[];
+            for(let i=0;i<this.length;i++){
+                let res=callBack(this[i],i);
+                if(res){
+                    ary.push(this[i]);
+                }
+            }
+            return ary
+        }
+
+        ary.myFilter((item,index)=>{
+            return item>200
+        });
+
+        //mySome 方法
+        let ary = [100, 200, 300, 400];
+        Array.prototype.mySome = mySome;
+        function mySome(callBack) {
+            for (let i = 0; i < this.length; i++) {
+                let res = callBack(this[i], i);
+                if (res) {
+                    return res;
+                }
+            }
+            return false;
+        }
+       let res= ary.mySome((item, index) => {
+            return item > 200
+        });
+
+
+    </script>
+</body>
+
+</html>

@@ -77,34 +77,48 @@
     <script>
         // 1、获取所有的span元素;
         // 2、循环所有的span，判断span有没有兄弟元素，如果有就给当前span加上一个close类名，如果没有，那就加上一个open类名
-         let spans=document.getElementsByTagName("span");
-         for(var i=0;i<spans.length;i++){
-             let cur=spans[i];
-             if(cur.nextElementSibling){
-                 cur.classList.add('close');
-                 cur.nextElementSibling.style.display='none';
-             }
-             else{
-                 cur.classList.add('open');
-             }
-         }
+        let spans=document.getElementsByTagName('span');
+        let box=document.getElementById('box');
+        for(let i=0;i<spans.length;i++){
+           let cur=spans[i];
+           let next=cur.nextElementSibling
+            if(cur.nextElementSibling){
+                cur.classList.add('close');
+                next.style.display='none';
+            }
+            else{
+                cur.classList.add('open');
+            }
+        }
 
-         box.onclick=function(e){
-             let cur=e.target;
-             let next=cur.nextElementSibling;
-             if(next){
-               
-                 if(cur.className.includes('close')){
-                        cur.className='open';
-                        next.style.display='block';
-                 }
-                 else{
-                     cur.className='close';
-                     next.style.display="none";
-                 }
-             }
+        box.onclick=function(e){
+            console.log(e.target);
+            let cur=e.target;
+            let next=cur.nextElementSibling;
 
-         }
+            if(cur.nodeName!=='SPAN'){
+                return;
+            }
+            if(next){
+                console.log(111);
+                if(cur.className.includes('close')){
+                    cur.className='open';
+                    next.style.display='block';
+                }
+                else{
+                    cur.className='close';
+                    next.style.display='none';
+
+                    let uls=next.getElementsByTagName('ul');
+                    for(let i=0;i<uls.length;i++){
+                        uls[i].style.display='none';
+                        uls[i].previousElementSibling.className='close';
+                    }
+                }
+
+
+            }
+        }
         
    
 
