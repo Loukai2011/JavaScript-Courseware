@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box"></div>
+  <ul id="list"></ul>
+  <button id="btn">点击刷新div</button>
+  <script>
+    let box = document.getElementById('box');
+    let list = document.getElementById('list');
+    let btn = document.getElementById('btn');
+    function get(url,callBack){
+      let xhr = new XMLHttpRequest;
+      xhr.open('GET',url);
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+          callBack(JSON.parse(xhr.response))
+        }
+      }
+      xhr.send();
+    }
+
+    function renderBOX(data){
+      box.innerHTML = `<p>${data[0].name}<p>`
+    }
+    function renderLIST(data){
+      list.innerHTML = `<li>${data[0].name}<li>`
+    }
+    get('./data.json',renderBOX);
+    get('./data1.json',renderLIST);
+    btn.onclick = function(){
+      get('./data.json',renderBOX);
+    }
+  </script>
+</body>
+</html>

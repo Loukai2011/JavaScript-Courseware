@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let ary=[100,200,300,400];
+        Array.prototype.myForEach=myForEach;
+ 
+        function myForEach(callBack){
+            for(let i=0;i<this.length;i++){
+                callBack(this[i],i)
+            }
+
+        }
+        ary.myForEach((item,index)=>{
+            console.log(item,index);
+        });
+
+        let ary=[100,200,300,400];
+        Array.prototype.myMap=myMap;
+        function myMap(callBack){
+            let ary=[];
+            for(let i=0;i<this.length;i++){
+              ary.push(callBack(this[i],i));
+            }
+            return ary
+        }
+        ary.myMap((item,index)=>{
+            return item
+        });
+
+
+        let ary=[100,200,300,400];
+        Array.prototype.myFilter=myFilter;
+        function myFilter(callBack){
+            let ary=[];
+            for(let i=0;i<this.length;i++){
+                let res=callBack(this[i],i)
+               if(res){
+                   ary.push(this[i]);
+               }
+            }
+            return ary;
+        }
+        let res=ary.myFilter((item,index)=>{
+            return item>100
+        });
+   
+       let ary=[100,200,300,400];
+       Array.prototype.mySome=mySome;
+       function mySome(callBack){
+           for(let i=0;i<this.length;i++){
+               let res=callBack(this[i],i);
+               if(res){
+                   return true
+               }
+           }
+           return false
+
+       }
+       ary.mySome((item,index)=>{
+           return item>200
+       });
+
+
+       let ary=[100,200,300,400];
+       Array.prototype.myEvery=myEvery;
+       function myEvery(callBack){
+           for(let i=0;i<this.length;i++){
+               let res=callBack(this[i],i);
+               if(!res){
+                    return false
+               }
+           }
+           return true
+
+       }
+       ary.myEvery((item,index)=>{
+           return item>50
+       });
+
+       let ary=[100,200,300,400];
+       Array.prototype.myFind=myFind;
+       function myFind(callBack){
+           for(let i=0;i<this.length;i++){
+               let res=callBack(this[i],i);
+               console.log(1);
+               if(res){
+                   return this[i]
+               }
+           }
+
+       }
+       let res=ary.myFind((item,index)=>{
+           return item>400
+       });
+
+        
+
+
+    </script>
+</body>
+</html>

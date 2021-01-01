@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>这是1页面</div>
+  <a href="./index2.html">点击跳转到2页面</a>
+
+  <button id="btn">前进</button>
+  <script>
+   let btn = document.getElementById('btn');
+    btn.onclick = function(){
+      history.forward()
+    }
+  </script>
+</body>
+</html>

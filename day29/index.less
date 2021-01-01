@@ -1,0 +1,158 @@
+// less支持变量和嵌套
+
+@w:100px; // 创建一个变量，变量的值四200px
+@bg:green; // 样式的变量(只要是存储样式)
+
+@name:#box .header; // 名称变量(存储的是选择器的名称)
+
+
+@url:'./box/img'; // 路径的变量
+
+@{name} { // 如果当前的变量是选择器的话，要在@后面的变量名加大括号进行包裹
+  width: @w;
+  height: @w;
+  background: @bg;
+}
+@{name}{
+  width: 200px;
+}
+
+ #header {
+  background: @bg;
+}
+
+#box {
+  background: url(@url);
+}
+#header { // 在引路径的时候如果想在变量后边加上一部分，那就用下边这种形式(跟模板字符串很像)
+  background: url('@{url}/1.png');
+}
+
+#title {
+  background: url('@{url}/2.png');
+}
+
+// less中的嵌套
+#box .header a span {
+
+}
+// 在样式嵌套中有类似作用域的功能
+// 在样式中使用变量，寻找变量的过程类似于作用域链查找机制，一层一层的往外找
+#box {
+  width: 200px;
+  height: 200px;
+  @w:800px; // 这里不仅可以写样式，还可以写样式变量
+  .header {
+    @w:1000px;
+    width: @w; 
+    height: @w;
+    a {
+      color: white;
+      span {
+        height: 50px;
+      }
+    }
+  }
+}
+
+
+// &就代表最近的父级的选择器的名称
+#box {
+  // &就代表最近的父级的选择器的名称
+  &:hover {
+    color:red
+  }
+  &::after {
+    content:'——————'
+  }
+  &::before {
+    content:'before'
+  }
+}
+// 编译之后的结果如下
+// #box:hover {color:red;}
+// #box::after {content: '——————';}
+// #box::before {content: 'before';}
+
+@s:rgb(0,0,0);
+@d:rgb(1,2,3);
+@a:100rem;
+@f:200px;
+
+#box {
+  color:@s+@d;
+  width:@a+@f;
+  // 如果相加的时候单位不统一，那就以第一个单位为准
+  // 如果相加的时候有的值没有单位，那也是以第一个为准
+}
+
+// less还支持函数，还支持继承
+
+// .public(@w,@h){ // less中的函数可以有形参
+//   // 函数体一旦有形参，那函数执行的使用就得给他传递实参
+//      形参和实参的个数是一一对应的，而且数量必须一致
+//   width: @w;
+//   height: @h;
+//   border:1px solid red;
+//   line-height: 300px;
+// }
+
+
+
+// #box {
+//   .public(100px,200px)
+// }
+
+// #title {
+//   .public(200px,300px)
+// }
+
+
+// .public(@w,...){ // less中的函数可以有形参
+//   // 如果你不想写形参，可以拿...代替
+//   width: @w;  // @w就是实参的第一个值
+//   height: 200px;
+//   border:@arguments;
+//   line-height: 300px;
+// }
+
+// #title {
+//   .public(1px,solid,red);
+// }
+
+//-----------------------------------------------------
+// less解析的顺序是从后往前解析
+// @fnord: "I am fnord.";
+// @var:    "fnord";
+// #wrap::after{
+//   content: @@var; //将@var替换为其值 content:@fnord;
+//   // @"fnord" //--> "I am fnord."
+// }
+
+// /* 生成的 CSS */
+// #wrap::after{
+//   content: "I am fnord.";
+// }
+
+//---------------------------------------
+//   less的继承
+.box {
+  color:red;
+  background: green;
+}
+
+#title {
+  width: 200px;
+  height: 200px;
+  &:extend(.box); // 想继承谁小括号里就写谁
+}
+
+//-------------------------------
+// 支持逻辑判断
+.pub(@w) when(@w<100){
+  width:500px
+}
+
+#box {
+  .pub(50)
+}

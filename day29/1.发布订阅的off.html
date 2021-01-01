@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let obj = {
+      click: [100, 200, 300, 400]
+    };
+
+    function off(ele, type, fn) { // fn = 200
+      let ss = ele[type]; // af0 af1
+
+      // 这只是给ss重新赋值，之前的事件池子并不会发生任何变化
+      // ss = ss.filter((item, index) => {
+      //   if (item === 200) {
+      //     return false
+      //   }
+      //   return true;
+      // }); // af1
+      // filter返回值是一个新的数组 里边存储的是过滤之后的数据
+      // [100,300,400]
+
+      // obj.click = af1
+      ele[type] = ss.filter((item, index) => {
+        // if (item === 200) {
+        //   return false
+        // }
+        // return true;
+        return item !== 200
+      });
+
+    };
+    off(obj, 'click', 200)
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+ // location和history
+
+// history是当前页面切换的历史记录，里边有当前切换地址的一些信息和操作方法，
+// 在history中会有一个存储页面信息的池子，只要你打开了某一个页面不关闭他，那当前那个页面的历史记录就会保存在池子里
+
+// history自己身上的length代表了当前历史栈中存储了历史页面的个数
+// 还在当前history实例所属类的原型上有go、back、forward方法，他们能够实现对页面的前进(forward)和后退(back)或者实现指定层级的前进和后退(go方法)
+
+// history.go() 进入到指定的页面，可以传递参数，如果传1，那就是前进一级  如果传-1那就是后退1级
+// history.forward() 前进一级
+// history.back() 后退一级
+
+//---------------------------------------------------------------
+// location对象中存储了一些属性和方法可以让咱们来操作和获取url
+// hash:哈希值
+// host:域名+端口号
+// hostname:域名
+// href:当前url
+// origin:协议+域名+端口号
+// pathname: 资源路径名称
+// port：端口号
+// protocol：协议
+// search：给后台发送的参数(问号传参部分)
+// 上边的这些属性不光可以获取，还可以进行设置
+// 例如：location.href = 'https://www.baidu.com'  切换当前页面到百度
+
+// reload() 刷新当前的页面
+// replace() 把当前历史记录中的页面进行替换，打开一个新的页面(不能回退到上一个页面)
+  </script>
+</body>
+
+</html>

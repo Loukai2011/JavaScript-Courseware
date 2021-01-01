@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 800px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+  <script>
+     let box=document.getElementById('box');
+
+    // let timer=null;
+    //  box.onclick=function(){    
+    //      if(timer){
+    //          clearInterval(timer)
+    //      }
+    //   timer=setTimeout(()=>{
+    //       console.log(1);
+    //   },1000);
+    //  }
+
+
+    // let timer=null;
+    //  box.onclick=function(){    
+     
+    //   if(!timer){
+    //     console.log(1);       
+    //   }
+    //   clearTimeout(timer);
+    //   timer=setTimeout(() => {
+    //      timer=null;
+    //   }, 2000);
+     
+    //  }
+// let previous=0;
+// window.onscroll=function(){
+//     let now=Date.now();
+//     if(now-previous>=1000){
+//         console.log(1);
+//         previous=now;
+//     }
+// }
+let timer;
+window.onscroll=function(){
+        if(!timer){
+          timer=setTimeout(()=>{
+            timer=null;
+           console.log(1);
+          },1000)
+        }
+      }
+
+     
+
+  </script>
+</body>
+</html>

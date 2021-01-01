@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+  <script>
+      let box={};
+      function on(ele,type,fn){
+       
+         if(!ele[type]){
+            ele[type]=[];
+         }
+
+         let pool=ele[type];
+
+        let res=pool.some(item => {
+             return item===fn
+         });
+         if(res){
+             return
+         }
+         pool.push(fn);
+      }
+
+      function f1(){
+           console.log(1);
+      }
+      function f2(){
+           console.log(2);
+      }
+      on(box,'fangfa',f1);
+      on(box,'fangfa',f2);
+      on(box,'fangfa',f2);
+      on(box,'fangfa',f1);
+
+      function emit(ele,type){
+          let pool=ele[type];
+          pool&&pool.forEach(item => {
+              if(typeof item=='function')
+              item();
+          });
+      }
+      emit(box,'fangfa')
+
+      function off(ele,type,fn){
+          let pool=ele[type];
+        //   pool&&pool.forEach((item,index)=>{
+        //       if(item===fn){
+        //           pool[index]=null;
+        //       }
+        //   })
+
+        pool&&(ele[type]=pool.filter(item=>{
+            return item!==fn
+        }))
+      }
+      off(box,'fagfa',f2);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+#box .header {
+  width: 100px;
+  height: 100px;
+  background: green;
+}
+#box .header {
+  width: 200px;
+}
+#header {
+  background: green;
+}
+#box {
+  background: url('box/img');
+}
+#header {
+  background: url('box/img/1.png');
+}
+#title {
+  background: url('box/img/2.png');
+}
+#box {
+  width: 200px;
+  height: 200px;
+}
+#box .header {
+  width: 1000px;
+  height: 1000px;
+}
+#box .header a {
+  color: white;
+}
+#box .header a span {
+  height: 50px;
+}
+#box:hover {
+  color: red;
+}
+#box::after {
+  content: '——————';
+}
+#box::before {
+  content: 'before';
+}
+#box {
+  color: #010203;
+  width: 300rem;
+}
+.box,
+#title {
+  color: red;
+  background: green;
+}
+#title {
+  width: 200px;
+  height: 200px;
+}
+#box {
+  width: 500px;
+}
