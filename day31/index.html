@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+  </style>
 </head>
-<body>
-  <div id="box"></div>
-  <ul id="list"></ul>
-  <button id="btn">点击刷新div</button>
-  <script>
-    let box = document.getElementById('box');
-    let list = document.getElementById('list');
-    let btn = document.getElementById('btn');
-    function get(url,callBack){
-      let xhr = new XMLHttpRequest;
-      xhr.open('GET',url);
-      xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-          callBack(JSON.parse(xhr.response))
-        }
-      }
-      xhr.send();
-    }
 
-    function renderBOX(data){
-      box.innerHTML = `<p>${data[0].name}<p>`
-    }
-    function renderLIST(data){
-      list.innerHTML = `<li>${data[0].name}<li>`
-    }
-    get('./data.json',renderBOX);
-    get('./data1.json',renderLIST);
-    btn.onclick = function(){
-      get('./data.json',renderBOX);
-    }
+<body>
+  <div id="box">11111</div>
+  <div>22222</div>
+  <!-- <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg" alt=""> -->
+
+  <script src="./index.js"></script>
+  <script>
+    // 127.0.0.1
+    // $.ajax({
+    //   url:'http://127.0.0.2:80/data.json?name=1',
+    //   type:'GET',
+    //   success:()=>{
+
+    //   }
+    // })
+    // let xhr = new XMLHttpRequest;
+    // xhr.open('POST','https://credit.baidu.com/creditserver/index/wise',false);
+    // xhr.send()
+  </script>
+  <script src="./node_modules/dist/jquery.js"> </script>
+  <script>
+    console.log(a); // 12
+    $('body')
   </script>
 </body>
+
 </html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // debugger;
+        (function () {
+            class Axios {
+                constructor(url, options) {
+                    
+                    this.url = url;
+                    this.options = options;
+                    return this.send();
+
+                };
+
+                send() {
+
+                    return new Promise((resolve, reject) => {
+                        let { url,
+                            options: {
+                                baseURL,
+                                headers,
+                                params,
+                                data,
+                                cache,
+                                transformRequest,
+                                transformResponse,
+                                timeout,
+                                method
+                            } } = this;
+                            let that = this;
+                        // console.log(params);
+                        let xhr = new XMLHttpRequest;
+                        url = baseURL + url;
+                        //如果params有参数 ，那就把他转换成字符串
+               
+                        params = this.transParms();
+                        
+
+                        let reg = /^(GET|OPTIONS|DELETE|HEAD)$/i;
+                      
+                        if (reg.test(method) && params) {
+                            url += `${this.addMark(url)}${params}`;
+
+                        }
+                     
+                        // console.log(url);
+                      
+                        xhr.open(method, url);
+                        
+                        xhr.onreadystatechange = function () {
+                            //处理请求完成之后的逻辑
+                            // debugger
+                            
+                            let {
+                                readyState,
+                                response,
+                                status,
+                                statusText,
+                                responseText
+                            } = xhr;
+                        //   console.log(this.options);
+                            if (readyState === 4) {
+                                
+                                if (/^(2|3)\d{2}$/.test(status)) {
+                                    resolve({
+                                        status,
+                                        statusText,
+                                        data: JSON.parse(response),
+                                        request: xhr,
+                                        headers: xhr.getAllResponseHeaders(),
+                                        config: that.options
+                                    });
+
+
+                                }
+                                else {
+                                    reject();
+                                }
+
+                            }
+                        }
+                        xhr.send();
+
+                    });
+
+                }
+
+                transParms() {
+                    let { options: { params } } = this;
+                    console.log(params);
+                    if (!params) return params;
+                    let str = '';
+
+                    for (let key in params) {
+                        if (!params.hasOwnProperty(key)) break;
+                        str += `${key}=${params[key]}$`;
+                    }
+                    str = str.slice(0, str.length - 1);
+                    console.log(str);
+                    return str;
+                }
+                addMark(url) {
+                    return url.includes('?') ? '&' : '?';
+
+                }
+
+            }
+            function axios() {
+
+            }
+            axios.defaluts = {
+                baseURL: '',
+                cache: true,
+                headers: {
+                    'Content-type': 'application/x-www-from-urlencoded'
+                },
+                data: null,
+                params: null,
+                transformRequest: function (data) {
+                    let str = '';
+                    if (!data) return null;
+                    for (let key in data) {
+                        if (!data.hanOwnProperty(key)) break;
+                        str += `${key}=${data[key]}$`;
+                    }
+                    str = str.slice(0, str.length - 1);
+                    return str;
+                },
+                transformResponse: function (data) {
+                    return data;
+                },
+                timeout: null,
+
+
+
+            };
+
+            function mergeOption(options) {
+                let headers = { ...axios.defaluts.headers, ...options.headers };
+                return { ...axios.defaluts, ...options, headers: headers };
+            }
+
+            axios.get = function (url, options) {
+                let res = mergeOption(options);
+
+                res.method = 'get';
+                return new Axios(url, res);
+            };
+
+
+            window.axios = axios;
+        }());
+
+        // debugger
+        let res = axios.get('data.json', {
+            params: { name: 'loukai', age: 25 },
+            timeout: 100,
+            headers: { 'loukai': 23 }
+        });
+        // console.log(res);
+        res.then((res) => { console.log(res); }).catch(() => { console.log(1); });
+
+
+    </script>
+</body>
+
+</html>

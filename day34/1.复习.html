@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // xhr
+    // open()  send() abort()  status  statusText  responseURL responseXML responseText response timeout readyState  getAllResponseHeaders getResponseHeader
+    // setRequestHeader  with... ontimeout  onreadystatechange
+
+
+    let xhr = new XMLHttpRequest; // 0
+
+    xhr.onreadystatechange = function () {
+      // 3次  4次
+    };
+    xhr.open(); // 1
+    xhr.send(); // 2 3 4
+
+    $.ajax({
+      url,
+      method/ type,
+      async,
+      cache,
+      dataType,
+      contentType,
+      success,
+      error,
+      complete,
+      timeout,
+      data,
+      headers
+    });
+
+    // 创建一个函数
+    function ajax(options) {
+
+      // 1.把默认的参数和用户传递的参数进行合并；
+      let xhr = new XMLHttpRequest; // 0
+
+      // 2.把data转化成字符串的格式
+
+      // 3.如果当前是get系列请求，那就把data拼接到url后面，然后把data置位null
+
+      // 4.是否走缓存
+      // 如果当前是get系列请求，并且cache的值是false，那就在url默认拼接上一个时间戳或者随机数
+
+      // 5.设置超时时间
+      // 如果当前的timeout是null，那就什么都不做，如果不是null，那就开始设置超时时间
+
+      // 6.withCredentials: 跨域的时候是否允许携带资源凭证(cookie)
+      // 默认是false，是不允许的，设置为true就允许了
+
+
+
+      xhr.open(type,url,async); 
+
+      // 6.设置请求头
+      // 如果当前的headers不是null，那就要实用for in循环去遍历当前的对象，把对象里的键值对以 setRequestHeader方法去进行设置
+
+
+
+      xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4){
+          if(/^(2|3)\d{2}$/.test(xhr.status)){
+            // dataType
+            success(xhr.response,xhr.statusText,xhr)
+          }
+          else {
+            error()
+          }
+        }
+      };
+     
+      xhr.send(data); 
+    }
+
+    // content-type
+
+    xhr.send('内容')
+
+    // 字符串   'key=value&age=2'   '{"name":100}'
+    // 文件   .txt .html  .css
+    // 二进制  流
+
+    // postman
+
+    
+  </script>
+</body>
+
+</html>

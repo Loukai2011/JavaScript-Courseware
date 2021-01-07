@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    // ajax的串行会让并行
+
+    // 串行的例子
+
+    // 我想请求某个学生的信息，{name:'qingya',age:18,sex:1,id:001}
+
+    // 当我把学生的信息请求来之后我还想请求他的各科成绩(把第一次请求来的学生id作为这次请求的参数发送过去)
+
+    // $.ajax({
+    //   url: 'xxxx/student/info',
+    //   type: 'get',
+    //   success: (data) => {
+    //     // {name:'qingya',age:18,sex:1,id:001}
+    //     $.ajax({
+    //       url: 'xxxx/student/score',
+    //       type: 'get',
+    //       data: { id: data.id },
+    //       success: (data) => {
+    //         //
+    //       }
+    //     });
+    //   }
+    // });
+    // //---------------------------------------
+
+    // function send(url, method, data = {}) {
+    //   return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //       url,
+    //       type: method,
+    //       data,
+    //       success: (res) => {
+    //         resolve(res);
+    //         // {name:'qingya',age:18,sex:1,id:001}
+    //       }
+    //     })
+    //   });
+    // }
+
+    // let res = send('xxxx/student/info', 'get'); // 
+    // res.then((res) => {
+    //   // 发送第二个请求
+    //   return send('xxxx/student/score', 'get', { id: res.id })
+    // }).catch(() => {
+
+    // });
+
+    //----------------------------------------
+
+    // ajax的并行
+    // 页面有两个ajax请求，我要等到页面的所有请求，请求完成以后，期通知用户当前的页面已经渲染完毕
+
+    // let flag = 0;
+    // $.ajax({
+    //   url:'data.json',
+    //   success:()=>{
+    //     flag++;
+    //     notice()
+    //   }
+    // });
+    // $.ajax({
+    //   url:'data.json',
+    //   success:()=>{
+    //     flag++;
+    //     notice()
+    //   }
+    // });
+
+    // function notice(){
+    //   if(flag>=2){
+    //     alert('当前页面已经加载完毕，请使用')
+    //   } 
+    // }
+
+
+
+
+
+    // function send(url, method, data = {}) {
+    //   return new Promise((resolve, reject) => {
+    //     $.ajax({
+    //       url,
+    //       type: method,
+    //       data,
+    //       success: (res) => {
+    //         resolve(res);
+    //         // {name:'qingya',age:18,sex:1,id:001}
+    //       }
+    //     })
+    //   });
+    // }
+    // let res = Promise.all([send('xxx'),send('xxx')]);
+
+    // res.then((res)=>{
+    //   // [data,data]
+    //   console.log('加载成功');
+    // }).catch(()=>{
+
+    // })
+
+
+  </script>
+</body>
+
+</html>

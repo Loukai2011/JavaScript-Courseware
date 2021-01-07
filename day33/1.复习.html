@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // HTTP状态码
+    // 200 204 301 302(307) 304  404 500 503 
+
+    // ajax的状态码
+    // 0  xhr
+    // 1  open
+    // 2 响应头
+    // 3 开始接受响应体
+    // 4 响应体已经接受完毕
+
+    let xhr = new XMLHttpRequest;
+    // 0
+    xhr.timeout = 10; // 超时之后会自动终止当前请求
+    xhr.ontimeout = function () {
+      console.log('请求超时了');
+    }
+    xhr.open('GET', 'data.json');
+    // // 1
+
+    xhr.send();
+    console.log(xhr);
+
+    // // ajax身上常用的属性和方法
+    // xhr.responseURL // 请求的url
+    // xhr.responseXML // 响应的XML格式的数据默认是null
+    // xhr.responseText// 响应的字符串格式的数据默认是null
+    // xhr.response // 影响的服务端的数据
+    // xhr.status // 当前请求的HTTP的状态
+    // xhr.statusText // 当前请求的HTTP的状态的描述
+    // xhr.timeout // 请求超时的时间
+    // xhr.ontimeout = function () { }; // 当请求超时了，此函数就会执行
+    // xhr.onreadystatechange // 监听当前请求的步骤，只要步骤发生变化，他说绑定的方法就执行
+    // xhr.readyState // 当前请求的步骤码
+    // xhr.withCredentials = true; // 在跨域请求中是否允许携带资源凭证(cookie)
+    // xhr.getAllResponseHeaders(); // 获取全部响应头的信息
+    // xhr.getResponseHeader('key'); // 获取单个的响应头的信息
+
+    // xhr.setRequestHeader('key',value); // value会自动转换成字符串 (必须要在send执行之前设置请求头)
+
+    // xhr.open() // 打开一个请求(配置一个请求)
+    // xhr.send() // 发送一个请求
+    // xhr.abort(); // 终止当前的请求
+
+    // DONE: 4
+    // HEADERS_RECEIVED: 2
+    // LOADING: 3
+    // OPENED: 1
+    // UNSENT: 0
+
+    // name=1&age=2
+
+    // xhr.send('name=1&age=2')
+    // form-data  '{name:1,age:2}'
+
+
+    //-------------------------------------------
+        // GET DELTE HEAD OPTIONS
+
+    // POST PUT
+
+    // get  post
+
+    // get和post直接的区别
+
+    // 1.get请求时以问号传参的形式  post请求时以请求体的形式传参
+    // 2.get请求传递的参数比post少
+    // 3.get请求有可能产生缓存 (不想走缓存就在url后边拼接一个不重复的参数)  post没有缓存
+    // 4.get相对post来说不安全
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    // axios是第三方的，基于promise封装的ajax库(jq版 的ajax没有基于promise去封装)
+
+    console.dir(axios)
+    // 为给定 ID 的 user 创建请求
+    //  let res =  axios.get('/user?ID=12345');
+    //  console.log(res); // promsie实例
+
+    // axios上请求方法的返回值都是Promise的实例
+
+    // axios.get('/user?ID=12345').then((res) => {
+    //   console.log(res);
+    // }).catch(() => {
+
+    // });
+    // 上面的请求也可以这样做
+    // axios.get('/user', { params: { ID: '12345' } })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    //------------------------------
+    // axios.post('/user', {
+    //   firstName: 'Fred',
+    //   lastName: 'Flintstone'
+    // },{}).then(function (response) {
+    //   console.log(response);
+    // })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    //axios支持的请求类型，以及传参方式
+    // axios.get(url,config)
+    // axios.delete(url,config)
+    // axios.head(url,config)
+    // axios.options(url,config)
+    // axios.get('xxx',{parmas:{name:1,age:2},timeout:2000})
+
+    // axios.post(url, data, config)
+    // axios.put(url, data, config)
+    // axios.patch(url, data, config)
+    // axios.post('xxx',{name:1,age:2},{timeout:2000})
+
+    //  axios.get('daa.json').then((res)=>{
+    //    // 请求成功之后自定就会把当前promise的实例置位成功的状态，然后就走then里的回调
+    //     console.log(res);
+    //     // 当前axios返回的内容是一个大的对象，里边包含了请求和返回的大多数信息
+    //     // config当前请求的配置信息
+    //     // data：响应体
+    //     // headers:响应头
+    //     // status：HTTP状态码
+    //     // statusText:HTTP状态描述
+    //     // request：当前的ajax实例
+    //  }).catch((res)=>{
+    //    // 请求失败之后自定就会把当前promise的实例置位失败的状态，然后就走catch里的回调
+    //   console.log(res);
+    //  })
+
+    //-----------------------------------------------------------
+    // axios({
+    //   method:'get',
+    //   url:'xxxx'
+    // })
+    // xxxxxx/box/list
+    // xxxxxx/box/detail
+    // xxxxxx/box/info
+    axios.defaults.baseURL = 'http://www.nihao.com/box/';
+    // `transformRequest` 允许在向服务器发送前，修改请求数据
+    // 只能用在 'PUT', 'POST' 和 'PATCH' 这几个请求方法
+    // 后面数组中的函数必须返回一个字符串，或 ArrayBuffer，或 Stream
+    axios.defaults.transformRequest = function (data, headers) {
+      // 当前函数会在请求发送出去之前就执行
+      // 对当前的data进行转换(data就是你传递的参数)
+      console.log(headers);
+      let str = ``;
+      for(let key in data){
+        str+=`${key}=${data[key]}&`
+      }
+      str = str.slice(0,str.length-1);
+      // 'name=1&age=2'
+
+      return str;
+    }
+
+    axios.post('list', {
+      name:1,
+      age:2
+    });
+    // axios.get('detail', {
+
+    // });
+    // axios.get('detail', {
+    //   baseURL: 'http://www.xxxxx.com/box/'
+    // });
+  </script>
+</body>
+
+</html>

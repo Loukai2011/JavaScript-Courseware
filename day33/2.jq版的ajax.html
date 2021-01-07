@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    $.ajax({
+      url:'xxx', // API请求地址
+      method:'GET', // GET DELETE OPTIONS HEAD POST PUT(大小写都可以) 可以使用type
+      data:null, // 请求携带的参数 格式可以是对象({key:value})和字符串(key=value) // 【如果传递的是字符串并且是get请求，那就直接拼接到url后边就可以，如果是post请求，那就把字符串放到send中】【如果传递的是对象，都需要把对象转换成字符串，】
+      async:true, // 是否同异步，默认是true是异步， false代表同步
+      dataType:'JSON', // 服务端返回的数据的格式 (默认返回的是JSON格式的对象) JSON TEXT XML JSONP
+      cache:true, // 是否走缓存，只在get系列请求下有效(默认是true走缓存) 可以设置为false不走缓存(在url默认拼接一个随机数或者时间戳)
+      success:null, // 当前请求成功以后执行的回调函数，次函数的形参就是当前服务器返回的结果 (data,statusText,xhr)=>{}
+      error:null, // 如果当前请求请求失败，那error对应的回调函数就会执行(data,statusText,xhr)=>{}
+      complete:null, // 不管当前是请求失败还是请求成功，只要请求完成，他都执行 
+      timeOut:null, // 设置当前请求超时的时间
+      headers:null, // 设置当前的请求头信息，传递的值是对象类型的{key:value},请求头中的属性值不能是汉字，如果想传递汉字，那就给汉字进行转码
+      contentType:"application/x-www-form-urlencoded"// 设置传递给服务器内容的格式类型 默认是
+      // 客户端传递给服务器信息的格式（类型一般都是字符串），常用的：
+      //x-www-form-urlencoded：name=xxx&lx=1
+     
+    });
+    // jq版的ajax是在jquery自己身上存放的，当使用的时候rag其执行，并且给其传递一个对象，对象里存储的键值对就是当前请求所需的参数或者配置
+  
+
+  //  let obj =  {name:'xxx',age:18};
+  //  let str = ''; // name=xxx&age=18
+  //  for(let key in obj){
+  //   str+=`${key}=${obj[key]}&`
+  //  }
+  //  str = str.slice(0,str.length-1);
+
+  send(str) // 'name=xxx&age=18'
+  </script>
+</body>
+</html>

@@ -4,24 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
   <script>
-    // 在浏览器中输入url做了什么
-    // 解析url并发送请求(DNS解析服务器)--->域名解析--->和服务器建立TCP连接(打通客户端和服务端之间的连接通道 三次握手)--->发送HTTP请求(发送请求报文)-->接收并进行响应(响应报文【HTTP状态码+响应头+响应体】)-->关闭TCP连接(四次挥手)-->客户端进行数据的处理和渲染
 
-    // 200 304 404 500 503
+    // npm i   跑环境
+    // npm i 模块名  //下载到当前项目里(--save)
+    // npm i xxx -g  // 下载到全局
+    // npm i xxx --save-dev(下载到开发依赖)
+    
+    // 把模块下载到项目里和下载到全局有什么区别
+    // 1.在全局的话，每一个项目都可以用，在当前项目里下载只能在当前项目里使用
+    // less 3.1.5   1.xxx
 
-    // xxx.com/box?name=1
 
-    // 读写分离
-    // 文档碎片(模板字符串)
+    // 项目1  juqery 1.3.5     less 1.xxx
+    // 项目2  juqery 3.5.1     less 3.5.1
 
-    // cssText = ''
-    // 加类名
+    // npm init -y  
+    // npm uninstall xxx
+    // npm i xxx xxx xxx
 
-    // 能用css做到的就不要用js做(优先使用css3的样式)
+    // url的组成
+    // http://www.javascriptpeixun.cn:8080/course_set/2310/manage/course/2314/tasks?name=1#index
+    // 协议  域名  端口 资源路径 参数 hash值
 
+    // location  history
+
+    // location里的属性不光可以获取，还可以设置
+    // reload  replace 
+    
   </script>
+  <script src="./index.js"></script>
 </body>
 </html>

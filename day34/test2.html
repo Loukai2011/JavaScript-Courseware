@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let string = 'aaabbbbbccdd';
+        function duplicateChecking(string) {
+            let obj = {};
+            for (let i = 0; i < string.length; i++) {
+                //obj[string[i]] = null;
+                if(obj[string[i]]){
+                    let val=++obj[string[i]];
+                    obj[string[i]]=val;
+                } 
+                else{
+                    obj[string[i]]=1;
+                }              
+            }
+
+
+
+
+            return obj;
+        }
+        let res = duplicateChecking(string);
+        console.log(res);
+    </script>
+</body>
+
+</html>
